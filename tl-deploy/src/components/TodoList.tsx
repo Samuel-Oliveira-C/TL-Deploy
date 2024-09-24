@@ -2,6 +2,7 @@ import { useReducer, useState } from "react"
 import { reducerFunction } from "@/reducer/FunctionReducer";
 import { v4 as uuidv4 } from "uuid";
 
+    //custom Hook
 const useItemCount = (items:any[]) => {
     return items.length > 1? ` ${items.length} tarefas` :`${items.length} tarefa`
 };
@@ -34,9 +35,9 @@ const TodoList = () => {
     };
         //jsx
     return(
-        <div className="flex flex-col absolute">
-            <div className="flex flex-col gap-2 mt-28">
-                <h1 className="text-center text-xl font-semibold">Todo-List</h1>
+        <div className="flex flex-col justify-start items-center">
+            <div className="flex flex-col gap-3 mt-2 absolute">
+                <h1 className="ps-14 text-xl font-semibold">Todo-List</h1>
                 <div className="flex gap-4">
                     <input 
                         className="text-center rounded-md text-black"
@@ -50,11 +51,10 @@ const TodoList = () => {
                         className="bg-blue-500 text-white rounded-md p-2 mt-2"
                     >Adicionar</button>
                 </div>
-            </div>
-            <div className="mt-4">
+                <div className=" mt-4 relative">
                 {state.length > 0 ? itemCount : "Não tem nenhuma tarefa"}
             </div>
-            <div className="mt-4">
+            <div className=" mt-4 relative">
                 {state.length > 0 && (
                     <ul>
                         {state.map((item: any) => (
@@ -78,6 +78,8 @@ const TodoList = () => {
                     </ul>
                 )}
             </div>
+            </div>
+
         </div>
     )
 }
