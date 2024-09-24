@@ -10,7 +10,7 @@ const TodoList = () => {
                 <h1></h1>
                 <input 
                     type="text" 
-
+                    required
                     />
             </div>
             <div>{/**aqui vai o tamanho da lista e uma renderização condicional */}</div> 
@@ -20,6 +20,8 @@ const TodoList = () => {
 }
 /** Fazer o useReducer
  *  Criar um custom Hook para a quantidade de itens
+ *  Criar um objeto do input com os UUIDS
+ *  depois criar a lista
  */
 
 

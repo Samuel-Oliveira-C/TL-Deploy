@@ -1,32 +1,47 @@
+import { v4 as uuidv4 } from 'uuid';
+
+type ListItemsType = {
+    id: string 
+    nameTask: string
+    checkbox: boolean
+}
+
 type AddItem = {
-    id: any //inicial até baixar a biblioteca
+    id: string 
     nameTask: string
     checkbox: boolean
     type: "Add"
 }
 
 type RemoveItem = {
-    id: any //inicial até baixar a biblioteca
+    id:string 
     type: "Remove"
 }
 
 type ToggleElement = {
     checkbox:boolean
+    id:string
     type: "Toggle"
 }
 
 type ListState = AddItem | RemoveItem | ToggleElement
 
-const reducerFunction = (arg:ListState,items:[]) =>{
+const reducerFunction = (arg: ListState, items: ListItemsType[]) => {
     switch (arg.type) {
         case "Add":
-            
-            return 
-        case "Remove": return
-        case "Toggle": return
+            return [...items, { id: uuidv4(), nameTask: arg.nameTask, checkbox: false }];
+        
+        case "Remove":
+            return items.filter(item => item.id !== arg.id);
+
+        case "Toggle":
+            return items.map(item =>
+                item.id === arg.id ? { ...item, checkbox: !item.checkbox } : item
+            );
+
         default:
-            break;
+            return items;
     }
-}
+};
 
 export {reducerFunction}
