@@ -1,11 +1,12 @@
 import { useReducer, useState } from "react"
-import { reducerFunction } from "@/reducer/FunctionReducer";
+import { reducerFunction,ListState} from "@/reducer/FunctionReducer";
 import { v4 as uuidv4 } from "uuid";
 
     //custom Hook
 const useItemCount = (items:any[]) => {
     return items.length > 1? ` ${items.length} tarefas` :`${items.length} tarefa`
 };
+
 
 const TodoList = () => {
         //States
@@ -52,12 +53,12 @@ const TodoList = () => {
                     >Adicionar</button>
                 </div>
                 <div className=" mt-4 relative">
-                {state.length > 0 ? itemCount : "Não tem nenhuma tarefa"}
-            </div>
-            <div className=" mt-4 relative">
+                    {state.length > 0 ? itemCount : "Não tem nenhuma tarefa"}
+                </div>
+            <div className=" mt-4 relative ">
                 {state.length > 0 && (
-                    <ul>
-                        {state.map((item: any) => (
+                    <ul className="">
+                        {state.map((item: ListState) => (
                             <li key={item.id} className="flex justify-between items-center gap-2">
                                 <div className="flex items-center gap-2">
                                     <input
@@ -70,8 +71,7 @@ const TodoList = () => {
                                 <button
                                     onClick={() => handleRemoveItem(item.id)}
                                     className="text-red-500 hover:underline"
-                                >
-                                    Deletar
+                                > Deletar
                                 </button>
                             </li>
                         ))}
