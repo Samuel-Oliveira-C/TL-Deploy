@@ -3,7 +3,7 @@ import { reducerFunction,ListState} from "@/reducer/FunctionReducer";
 import { v4 as uuidv4 } from "uuid";
 
     //custom Hook
-const useItemCount = (items:any[]) => {
+const useItemCount = (items: ListState[]) => {
     return items.length > 1? ` ${items.length} tarefas` :`${items.length} tarefa`
 };
 
