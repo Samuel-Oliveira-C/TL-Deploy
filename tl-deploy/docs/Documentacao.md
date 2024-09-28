@@ -28,4 +28,8 @@
 
 **Lighthouse**
 
->// colocar mais depois dos testes unitarios 
+**Jest**
+
+**Testing-Library**
+
+**Cypress**
