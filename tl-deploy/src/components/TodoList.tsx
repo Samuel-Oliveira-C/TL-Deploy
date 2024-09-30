@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react"
+import { useCallback, useReducer, useState } from "react"
 import { reducerFunction,ListState} from "@/reducer/FunctionReducer";
 import { v4 as uuidv4 } from "uuid";
 
@@ -6,16 +6,20 @@ import { v4 as uuidv4 } from "uuid";
 const useItemCount = (items: ListState[]) => {
     return items.length > 1? ` ${items.length} tarefas` :`${items.length} tarefa`
 };
-
+    //type do Input
+type InputState = React.ChangeEvent<HTMLInputElement>
 
 const TodoList = () => {
         //States
     const [state,dispatch] = useReducer(reducerFunction,[]);
     const [task, setTask] = useState("");
     const itemCount = useItemCount(state);
+        
+        //Mudança de stado
+    const inputState = useCallback((text:InputState) => setTask(text.target.value),[])
 
         //Eventos
-    const handleAddItem = () => {
+    const handleAddItem = useCallback(() => {
         if (task.trim() !== "") {
             dispatch({
                 type: "Add",
@@ -25,8 +29,8 @@ const TodoList = () => {
             });
             setTask(""); // Limpa o input
         }
-    };
-
+    },[task])
+    
     const handleRemoveItem = (id: string) => {
         dispatch({ type: "Remove", id });
     };
@@ -45,7 +49,7 @@ const TodoList = () => {
                         type="text" 
                         placeholder="Adicionar item"
                         value={task}
-                        onChange={(text) => setTask(text.target.value)}
+                        onChange={(text) => inputState(text)}
                         />
                     <button
                         onClick={handleAddItem}
